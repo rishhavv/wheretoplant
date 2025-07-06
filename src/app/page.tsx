@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, Bot, Globe, TrendingUp, Users, Zap, MapPin, Star, Clock, MessageCircle, Menu, X } from 'lucide-react';
+import { ArrowRight, Bot, Globe, TrendingUp, Users, Zap, MapPin, MessageCircle, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Home() {
@@ -205,7 +205,7 @@ export default function Home() {
                 <Zap className="w-6 h-6 text-orange-600" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Instant Results</h3>
-              <p className="text-gray-600">Delivers comprehensive analysis within seconds via Telegram's familiar interface</p>
+              <p className="text-gray-600">Delivers comprehensive analysis within seconds via Telegram&apos;s familiar interface</p>
             </div>
           </div>
 
@@ -225,7 +225,7 @@ export default function Home() {
                   <span className="text-2xl font-bold text-green-600">2</span>
                 </div>
                 <h4 className="text-lg font-semibold text-gray-900 mb-2">AI Analysis</h4>
-                <p className="text-gray-600">The bot's machine learning model processes environmental data and climate patterns</p>
+                <p className="text-gray-600">The bot&apos;s machine learning model processes environmental data and climate patterns</p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -354,21 +354,21 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              What's Next?
+              What&apos;s Next?
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Restore AI Bot represents the first step in a comprehensive restoration ecosystem. Current focus is on "where to plant" - the critical foundation for success.
+                          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Restore AI Bot represents the first step in a comprehensive restoration ecosystem. Current focus is on &quot;where to plant&quot; - the critical foundation for success.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-2xl">
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Species Recommendation</h3>
-              <p className="text-gray-700">Engine for "what to plant" based on location analysis</p>
+              <p className="text-gray-700">Engine for &quot;what to plant&quot; based on location analysis</p>
             </div>
             <div className="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-2xl">
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Optimal Timing</h3>
-              <p className="text-gray-700">Predictions for "when to plant" for maximum success</p>
+              <p className="text-gray-700">Predictions for &quot;when to plant&quot; for maximum success</p>
             </div>
             <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-2xl">
               <h3 className="text-lg font-semibold text-gray-900 mb-2">State Expansion</h3>
@@ -396,8 +396,8 @@ export default function Home() {
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Ready to Make a Difference?
           </h2>
-          <p className="text-xl text-green-100 mb-8 max-w-2xl mx-auto">
-            Join the movement towards data-driven forest restoration. Whether you're a conservationist, researcher, or simply someone who cares about our environment, Restore AI Bot is your gateway to smarter restoration decisions.
+                      <p className="text-xl text-green-100 mb-8 max-w-2xl mx-auto">
+            Join the movement towards data-driven forest restoration. Whether you&apos;re a conservationist, researcher, or simply someone who cares about our environment, Restore AI Bot is your gateway to smarter restoration decisions.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a 
