@@ -13,10 +13,12 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg flex items-center justify-center animate-float">
-                <Globe className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold text-gray-900">wheretoplant</span>
+              <img
+                src="/wheretoPlantlogo.png"
+                alt="WhereToPlant Logo"
+                className="w-10 h-10 object-contain rounded-lg shadow-sm bg-white"
+              />
+              <span className="text-xl font-bold text-gray-900 sr-only">wheretoplant</span>
             </div>
             
             {/* Desktop Navigation */}
@@ -24,6 +26,7 @@ export default function Home() {
               <a href="#problem" className="text-gray-600 hover:text-green-600 transition-colors">Problem</a>
               <a href="#solution" className="text-gray-600 hover:text-green-600 transition-colors">Solution</a>
               <a href="#features" className="text-gray-600 hover:text-green-600 transition-colors">Features</a>
+              <a href="#demo" className="text-gray-600 hover:text-green-600 transition-colors">Demo</a>
               <a href="#try-now" className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
                 Try @seedsagebot
               </a>
@@ -64,6 +67,13 @@ export default function Home() {
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Features
+                </a>
+                <a 
+                  href="#demo" 
+                  className="text-gray-600 hover:text-green-600 transition-colors px-4 py-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Demo
                 </a>
                 <a 
                   href="#try-now" 
@@ -301,7 +311,7 @@ export default function Home() {
                 <Zap className="w-6 h-6 text-red-600" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Waste Reduction</h3>
-              <p className="text-gray-600">Prevents costly mistakes by identifying unsuitable plantation sites before investment</p>
+              <p className="text-gray-600">Prevents costly mistakes by identifying unsuitable plantation sites before investment, with a potential of $63M-$100M savings in Himachal Pradesh over 10 years.</p>
             </div>
             <div className="bg-white p-6 rounded-2xl shadow-lg">
               <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
@@ -316,6 +326,24 @@ export default function Home() {
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Data-Driven Policy</h3>
               <p className="text-gray-600">Provides evidence-based insights for government and NGO restoration strategies</p>
+            </div>
+          </div>
+
+          <div className="mt-16 bg-gradient-to-r from-blue-50 to-indigo-50 p-8 rounded-2xl border border-blue-200">
+            <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">Global Impact & Alignment</h3>
+            <div className="grid md:grid-cols-3 gap-8 text-center">
+              <div>
+                <p className="text-4xl font-bold text-blue-600 mb-2">350M+ ha</p>
+                <p className="text-gray-700">of land targeted for restoration globally, offering a massive opportunity for impact.</p>
+              </div>
+              <div>
+                <p className="text-4xl font-bold text-blue-600 mb-2">$10B+</p>
+                <p className="text-gray-700">in potential annual global waste if restoration is poorly targeted.</p>
+              </div>
+              <div>
+                <p className="text-4xl font-bold text-blue-600 mb-2">Global Goals</p>
+                <p className="text-gray-700">RestoreAI aligns with the SDGs, Bonn Challenge, and national commitments (NDCs).</p>
+              </div>
             </div>
           </div>
 
@@ -390,6 +418,26 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Demo Video Section */}
+      <section id="demo" className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Watch a Demo</h2>
+          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            See WhereToPlant in action! Watch this short video to understand how our platform helps you make smarter, data-driven restoration decisions.
+          </p>
+          <div className="aspect-w-16 aspect-h-9 w-full max-w-3xl mx-auto rounded-xl overflow-hidden shadow-lg mb-4">
+            <iframe
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+              title="WhereToPlant Demo Video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section id="try-now" className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-green-600 to-blue-600">
         <div className="max-w-4xl mx-auto text-center">
@@ -424,10 +472,12 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
             <div className="flex items-center justify-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg flex items-center justify-center">
-                <Globe className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold">wheretoplant</span>
+              <img
+                src="/wheretoPlantlogo.png"
+                alt="WhereToPlant Logo"
+                className="w-10 h-10 object-contain rounded-lg shadow-sm bg-white"
+              />
+              <span className="text-xl font-bold sr-only">wheretoplant</span>
             </div>
             <p className="text-gray-400 mb-4">
               Revolutionizing Forest Restoration Through AI-Powered Site Selection
@@ -436,6 +486,7 @@ export default function Home() {
               <a href="#problem" className="text-gray-400 hover:text-white transition-colors">Problem</a>
               <a href="#solution" className="text-gray-400 hover:text-white transition-colors">Solution</a>
               <a href="#features" className="text-gray-400 hover:text-white transition-colors">Features</a>
+              <a href="#demo" className="text-gray-400 hover:text-white transition-colors">Demo</a>
               <a href="#try-now" className="text-gray-400 hover:text-white transition-colors">Try Bot</a>
             </div>
             <div className="mt-8 pt-8 border-t border-gray-800">
