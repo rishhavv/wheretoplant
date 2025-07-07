@@ -51,6 +51,7 @@ export default function Home() {
               <a href="#solution" className="text-gray-600 hover:text-green-600 transition-colors">Solution</a>
               <a href="#features" className="text-gray-600 hover:text-green-600 transition-colors">Features</a>
               <a href="#demo" className="text-gray-600 hover:text-green-600 transition-colors">Demo</a>
+              <a href="/contact" className="text-gray-600 hover:text-green-600 transition-colors">Contact</a>
               <a href="#try-now" className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
                 Try @seedsagebot
               </a>
@@ -98,6 +99,13 @@ export default function Home() {
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Demo
+                </a>
+                <a 
+                  href="/contact" 
+                  className="text-gray-600 hover:text-green-600 transition-colors px-4 py-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Contact
                 </a>
                 <a 
                   href="#try-now" 
@@ -523,11 +531,12 @@ export default function Home() {
               <a href="#solution" className="text-gray-400 hover:text-white transition-colors">Solution</a>
               <a href="#features" className="text-gray-400 hover:text-white transition-colors">Features</a>
               <a href="#demo" className="text-gray-400 hover:text-white transition-colors">Demo</a>
+              <a href="/contact" className="text-gray-400 hover:text-white transition-colors">Contact</a>
               <a href="#try-now" className="text-gray-400 hover:text-white transition-colors">Try Bot</a>
             </div>
             <div className="mt-8 pt-8 border-t border-gray-800">
               <p className="text-gray-500 text-sm">
-                © 2024 WhereToPlant. All rights reserved.
+                © 2025 WhereToPlant. All rights reserved.
               </p>
             </div>
           </div>
