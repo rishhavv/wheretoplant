@@ -13,12 +13,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
-              <img
-                src="/wheretoPlantlogo.png"
-                alt="WhereToPlant Logo"
-                className="w-10 h-10 object-contain rounded-lg shadow-sm bg-white"
-              />
-              <span className="text-xl font-bold text-gray-900 sr-only">wheretoplant</span>
+              <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg flex items-center justify-center animate-float">
+                <Globe className="w-5 h-5 text-white" />
+              </div>
+              <span className="text-xl font-bold text-gray-900">wheretoplant</span>
             </div>
             
             {/* Desktop Navigation */}
@@ -472,12 +470,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
             <div className="flex items-center justify-center space-x-2 mb-4">
-              <img
-                src="/wheretoPlantlogo.png"
-                alt="WhereToPlant Logo"
-                className="w-10 h-10 object-contain rounded-lg shadow-sm bg-white"
-              />
-              <span className="text-xl font-bold sr-only">wheretoplant</span>
+              <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg flex items-center justify-center">
+                <Globe className="w-5 h-5 text-white" />
+              </div>
+              <span className="text-xl font-bold">wheretoplant</span>
             </div>
             <p className="text-gray-400 mb-4">
               Revolutionizing Forest Restoration Through AI-Powered Site Selection
