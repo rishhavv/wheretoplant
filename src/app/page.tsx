@@ -2,9 +2,10 @@
 
 import { ArrowRight, Bot, Globe, TrendingUp, Users, Zap, MapPin, MessageCircle, Menu, X, ChevronDown, Leaf, Target, Clock, Scaling } from 'lucide-react';
 import { useState } from 'react';
+import Image from 'next/image';
 
 // Accordion Item Component
-const AccordionItem = ({ title, children, isOpen, onClick }) => {
+const AccordionItem = ({ title, children, isOpen, onClick }: { title: string, children: React.ReactNode, isOpen: boolean, onClick: () => void }) => {
   return (
     <div className="border-b border-green-200">
       <button
@@ -26,9 +27,9 @@ const AccordionItem = ({ title, children, isOpen, onClick }) => {
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [openAccordion, setOpenAccordion] = useState(1);
+  const [openAccordion, setOpenAccordion] = useState<number | null>(1);
 
-  const handleAccordionClick = (index) => {
+  const handleAccordionClick = (index: number) => {
     setOpenAccordion(openAccordion === index ? null : index);
   };
 
@@ -302,10 +303,13 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="relative flex justify-center">
-              <img 
-                src="/Himachal_Pradesh_Map.png" 
+              <Image
+                src="/Himachal_Pradesh_Map.png"
                 alt="Map of Himachal Pradesh"
+                width={400}
+                height={500}
                 className="w-full max-w-md h-auto drop-shadow-xl rounded-xl border-4 border-green-300 bg-white"
+                priority
               />
             </div>
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, Bot, Globe, TrendingUp, Users, Zap, MapPin, MessageCircle, Menu, X, ChevronDown, Leaf, Target, Clock, Scaling } from 'lucide-react';
+import { Globe, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import Link from 'next/link';
 
