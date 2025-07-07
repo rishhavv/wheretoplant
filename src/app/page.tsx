@@ -425,9 +425,9 @@ export default function Home() {
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
             See WhereToPlant in action! Watch this short video to understand how our platform helps you make smarter, data-driven restoration decisions.
           </p>
-          <div className="aspect-w-16 aspect-h-9 w-full max-w-3xl mx-auto rounded-xl overflow-hidden shadow-lg mb-4">
+          <div className="aspect-w-9 aspect-h-16 w-full max-w-sm mx-auto rounded-xl overflow-hidden shadow-lg mb-4">
             <iframe
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+              src="https://www.youtube.com/embed/ld3vUOwQRJ4"
               title="WhereToPlant Demo Video"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
