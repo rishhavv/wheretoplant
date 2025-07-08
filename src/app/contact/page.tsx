@@ -1,6 +1,6 @@
 'use client';
 
-import { Globe, Menu, X } from 'lucide-react';
+‰import { Globe, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import Link from 'next/link';
 

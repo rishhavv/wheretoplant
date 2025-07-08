@@ -54,7 +54,7 @@ export default function Home() {
               <a href="#demo" className="text-gray-600 hover:text-green-600 transition-colors">Demo</a>
               <a href="/contact" className="text-gray-600 hover:text-green-600 transition-colors">Contact</a>
               <a href="#try-now" className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
-                Try @seedsagebot
+                Try @wheretoplantbot
               </a>
             </div>
 
@@ -113,7 +113,7 @@ export default function Home() {
                   className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors mx-4"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Try @seedsagebot
+                  Try @wheretoplantbot
                 </a>
               </div>
             </div>
@@ -127,13 +127,13 @@ export default function Home() {
           <div className="text-center mb-16">
             <div className="inline-flex items-center px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium mb-6">
               <Bot className="w-4 h-4 mr-2" />
-              AI-Powered Forest Restoration
+              ML-Powered Forest Restoration
             </div>
             <h1 className="text-5xl md:text-7xl font-bold animate-gradient mb-6">
             WhereToPlant Bot
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-4xl mx-auto">
-              Revolutionizing Forest Restoration Through AI-Powered Site Selection
+              Revolutionizing Forest Restoration Through ML-Powered Plantation Site Selection
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a 
@@ -159,20 +159,20 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              The Problem: $7+ Million Wasted Annually 💸
+              The Challenge: Billions Wasted on Ineffective Tree Planting 🌳💸
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Most tree planting projects choose the wrong locations, leading to massive waste of resources and failed restoration efforts.
+              Most tree planting initiatives fail by choosing unsuitable sites, squandering resources and hindering successful reforestation.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 mb-16 stagger-animation">
             <div className="bg-red-50 p-8 rounded-2xl border border-red-200">
-              <div className="text-4xl font-bold text-red-600 mb-2">~60%</div>
-              <p className="text-gray-700">of $12M+ annual restoration budget thrown into doomed sites</p>
+              <div className="text-4xl font-bold text-red-600 mb-2">60%</div>
+              <p className="text-gray-700">of annual restoration budget is wasted on doomed sites</p>
             </div>
             <div className="bg-orange-50 p-8 rounded-2xl border border-orange-200">
-              <div className="text-4xl font-bold text-orange-600 mb-2">50-90%</div>
+              <div className="text-4xl font-bold text-orange-600 mb-2">80%</div>
               <p className="text-gray-700">of trees die in poorly selected locations</p>
             </div>
             <div className="bg-yellow-50 p-8 rounded-2xl border border-yellow-200">
@@ -182,26 +182,26 @@ export default function Home() {
           </div>
 
           <div className="bg-gradient-to-r from-red-50 to-orange-50 p-8 rounded-2xl border border-red-200">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Why does this happen?</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Why Do Reforestation Efforts Fail?</h3>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-3">
                 <div className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
-                  <p className="text-gray-700">High mortality rates of planted saplings</p>
+                  <p className="text-gray-700"><strong>Inadequate Site Analysis:</strong> Planting without considering crucial data like soil health, climate patterns, and land history.</p>
                 </div>
                 <div className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
-                  <p className="text-gray-700">Wasted financial resources and human effort</p>
+                  <p className="text-gray-700"><strong>Mismatched Species:</strong> Selecting tree species that are not suited to the local micro-environment.</p>
                 </div>
               </div>
               <div className="space-y-3">
                 <div className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
-                  <p className="text-gray-700">Continued environmental degradation</p>
+                  <p className="text-gray-700"><strong>Ignoring Social Factors:</strong> Overlooking land tenure issues and community needs, which undermines long-term success.</p>
                 </div>
                 <div className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
-                  <p className="text-gray-700">Loss of community trust in conservation efforts</p>
+                  <p className="text-gray-700"><strong>Wasted Resources:</strong> Pouring funds and effort into locations doomed from the start, eroding trust and slowing progress.</p>
                 </div>
               </div>
             </div>
@@ -214,7 +214,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              The Solution: AI Meets Conservation
+              The Solution: ML Meets Conservation
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               WhereToPlant Bot (@wheretoplantbot) is a data-driven Telegram bot that transforms how we approach forest restoration.
@@ -264,7 +264,7 @@ export default function Home() {
                 User opens Telegram, finds @wheretoplantbot, and shares their geographic coordinates.
               </AccordionItem>
               <AccordionItem
-                title="2. AI Analysis"
+                title="2. Machine Learning Analysis"
                 isOpen={openAccordion === 2}
                 onClick={() => handleAccordionClick(2)}
               >
@@ -528,7 +528,7 @@ export default function Home() {
               <span className="text-xl font-bold">wheretoplant</span>
             </div>
             <p className="text-gray-400 mb-4">
-              Revolutionizing Forest Restoration Through AI-Powered Site Selection
+              Revolutionizing Forest Restoration Through ML-Powered Site Selection
             </p>
             <div className="flex justify-center space-x-6">
               <a href="#problem" className="text-gray-400 hover:text-white transition-colors">Problem</a>
