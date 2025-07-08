@@ -314,17 +314,17 @@ export default function Home() {
             </div>
 
             <div className="space-y-8">
-              <div className="bg-gradient-to-br from-green-200 to-green-400 p-6 rounded-2xl border border-green-300 shadow">
-                <h3 className="text-lg font-semibold text-green-900 mb-2">Altitude Variations</h3>
-                <p className="text-green-800">From 350m to 7,000m elevation requiring species-specific planning.</p>
+              <div className="bg-gradient-to-br from-blue-100 to-blue-200 p-6 rounded-2xl border border-blue-200 shadow">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Altitude Variations</h3>
+                <p className="text-gray-700">From 350m to 7,000m elevation requiring species-specific planning.</p>
               </div>
-              <div className="bg-gradient-to-br from-amber-100 to-green-100 p-6 rounded-2xl border border-green-200 shadow">
-                <h3 className="text-lg font-semibold text-green-900 mb-2">Climate Diversity</h3>
-                <p className="text-green-800">Subtropical to alpine conditions within the same state.</p>
+              <div className="bg-gradient-to-br from-green-100 to-green-200 p-6 rounded-2xl border border-green-200 shadow">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Climate Diversity</h3>
+                <p className="text-gray-700">Subtropical to alpine conditions within the same state.</p>
               </div>
-              <div className="bg-gradient-to-br from-green-100 to-amber-100 p-6 rounded-2xl border border-green-200 shadow">
-                <h3 className="text-lg font-semibold text-green-900 mb-2">Soil Complexity</h3>
-                <p className="text-green-800">Varied geological formations affecting plantation success.</p>
+              <div className="bg-gradient-to-br from-amber-100 to-amber-200 p-6 rounded-2xl border border-amber-200 shadow">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Soil Complexity</h3>
+                <p className="text-gray-700">Varied geological formations affecting plantation success.</p>
               </div>
             </div>
           </div>
