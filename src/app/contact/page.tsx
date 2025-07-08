@@ -1,6 +1,6 @@
 'use client';
 
-‰import { Globe, Menu, X } from 'lucide-react';
+import { Globe, Menu, X, Mail, ExternalLink } from 'lucide-react';
 import { useState } from 'react';
 import Link from 'next/link';
 
@@ -113,16 +113,26 @@ export default function ContactPage() {
               <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg">
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Rishav Katoch</h3>
                 <p className="text-lg text-green-600 font-semibold mb-4">Co-founder</p>
-                <a href="mailto:rishav.katoch17300@gmail.com" className="text-gray-600 hover:text-green-600 transition-colors">
-                  rishav.katoch17300@gmail.com
-                </a>
+                <div className="space-y-3">
+                  <a href="mailto:rishav.katoch17300@gmail.com" className="flex items-center text-gray-600 hover:text-green-600 transition-colors break-all">
+                    <Mail className="w-4 h-4 mr-3 flex-shrink-0" />
+                    <span>rishav.katoch17300@gmail.com</span>
+                  </a>
+                  <a href="https://www.rishavkatoch.me" target="_blank" rel="noopener noreferrer" className="flex items-center text-gray-600 hover:text-green-600 transition-colors">
+                    <ExternalLink className="w-4 h-4 mr-3 flex-shrink-0" />
+                    <span>rishavkatoch.me</span>
+                  </a>
+                </div>
               </div>
               <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg">
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Pushpendra Rana</h3>
                 <p className="text-lg text-green-600 font-semibold mb-4">Co-founder</p>
-                <a href="mailto:xyz@gmail.com" className="text-gray-600 hover:text-green-600 transition-colors">
-                  xyz@gmail.com
-                </a>
+                <div className="space-y-3">
+                  <a href="mailto:pranaifs@gmail.com" className="flex items-center text-gray-600 hover:text-green-600 transition-colors break-all">
+                    <Mail className="w-4 h-4 mr-3 flex-shrink-0" />
+                    <span>pranaifs@gmail.com</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
