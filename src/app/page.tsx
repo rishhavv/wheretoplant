@@ -176,8 +176,8 @@ export default function Home() {
               <p className="text-gray-700">of trees die in poorly selected locations</p>
             </div>
             <div className="bg-yellow-50 p-8 rounded-2xl border border-yellow-200">
-              <div className="text-4xl font-bold text-yellow-600 mb-2">$12M+</div>
-              <p className="text-gray-700">spent annually in Himachal Pradesh alone</p>
+              <div className="text-4xl font-bold text-yellow-600 mb-2">$800M+</div>
+              <p className="text-gray-700">spent annually in India on forest restoration and conservation</p>
             </div>
           </div>
 
