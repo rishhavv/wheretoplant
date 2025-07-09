@@ -133,7 +133,7 @@ export default function Home() {
             WhereToPlant Bot
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-4xl mx-auto">
-              Revolutionizing Forest Restoration Through ML-Powered Plantation Site Selection
+              Revolutionizing Forest Restoration Through Machine-Learning Powered Plantation Site Selection
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a 

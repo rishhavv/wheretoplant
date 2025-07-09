@@ -130,7 +130,7 @@ export default function ContactPage() {
                 <div className="space-y-3">
                   <a href="mailto:pranaifs@gmail.com" className="flex items-center text-gray-600 hover:text-green-600 transition-colors break-all">
                     <Mail className="w-4 h-4 mr-3 flex-shrink-0" />
-                    <span>pranaifs@gmail.com</span>
+                    <span>rana.pushpendra101@gmail.com</span>
                   </a>
                 </div>
               </div>
