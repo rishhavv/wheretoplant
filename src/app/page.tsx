@@ -155,34 +155,39 @@ export default function Home() {
       </section>
 
       {/* Problem Section */}
-      <section id="problem" className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+      <section id="problem" className="py-16 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              The Challenge: Billions Wasted on Ineffective Tree Planting 🌳💸
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Most tree planting initiatives fail by choosing unsuitable sites, squandering resources and hindering successful restoration.
-            </p>
-          </div>
+          <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+            <div className="text-left">
+              <div className="inline-flex items-center px-4 py-2 bg-red-100 text-red-800 rounded-full text-sm font-medium mb-4">
+                The Challenge
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Billions Wasted on Ineffective Tree Planting 💸
+              </h2>
+              <p className="text-xl text-gray-600">
+                Most tree planting initiatives fail by choosing unsuitable sites, squandering resources and hindering successful restoration.
+              </p>
+            </div>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-16 stagger-animation">
-            <div className="bg-red-50 p-8 rounded-2xl border border-red-200">
-              <div className="text-4xl font-bold text-red-600 mb-2">60%</div>
-              <p className="text-gray-700">of annual restoration budget is wasted on doomed sites</p>
-            </div>
-            <div className="bg-orange-50 p-8 rounded-2xl border border-orange-200">
-              <div className="text-4xl font-bold text-orange-600 mb-2">80%</div>
-              <p className="text-gray-700">of trees die in poorly selected locations</p>
-            </div>
-            <div className="bg-yellow-50 p-8 rounded-2xl border border-yellow-200">
-              <div className="text-4xl font-bold text-yellow-600 mb-2">$800M+</div>
-              <p className="text-gray-700">spent annually in India on forest restoration and conservation</p>
+            <div className="space-y-6">
+              <div className="bg-red-50 p-6 rounded-2xl border border-red-200 flex items-center shadow-md">
+                <div className="text-4xl font-bold text-red-600 mr-4">60%</div>
+                <p className="text-gray-700">of annual restoration budget is wasted on doomed sites</p>
+              </div>
+              <div className="bg-orange-50 p-6 rounded-2xl border border-orange-200 flex items-center shadow-md">
+                <div className="text-4xl font-bold text-orange-600 mr-4">80%</div>
+                <p className="text-gray-700">of trees die in poorly selected locations</p>
+              </div>
+              <div className="bg-yellow-50 p-6 rounded-2xl border border-yellow-200 flex items-center shadow-md">
+                <div className="text-4xl font-bold text-yellow-600 mr-4">$800M+</div>
+                <p className="text-gray-700">spent annually in India on forest restoration and conservation</p>
+              </div>
             </div>
           </div>
 
           <div className="bg-gradient-to-r from-red-50 to-orange-50 p-8 rounded-2xl border border-red-200">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Why Do Reforestation Efforts Fail?</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Why Do Reforestation Efforts Fail?</h3>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-3">
                 <div className="flex items-start space-x-3">
