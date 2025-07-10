@@ -162,7 +162,7 @@ export default function Home() {
               The Challenge: Billions Wasted on Ineffective Tree Planting 🌳💸
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Most tree planting initiatives fail by choosing unsuitable sites, squandering resources and hindering successful reforestation.
+              Most tree planting initiatives fail by choosing unsuitable sites, squandering resources and hindering successful restoration.
             </p>
           </div>
 
