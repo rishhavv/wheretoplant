@@ -124,16 +124,6 @@ export default function ContactPage() {
                   </a>
                 </div>
               </div>
-              <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Pushpendra Rana</h3>
-                <p className="text-lg text-green-600 font-semibold mb-4">Co-founder</p>
-                <div className="space-y-3">
-                  <a href="mailto:pranaifs@gmail.com" className="flex items-center text-gray-600 hover:text-green-600 transition-colors break-all">
-                    <Mail className="w-4 h-4 mr-3 flex-shrink-0" />
-                    <span>rana.pushpendra101@gmail.com</span>
-                  </a>
-                </div>
-              </div>
             </div>
           </div>
         </section>
