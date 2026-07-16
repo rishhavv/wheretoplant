@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Fraunces, IBM_Plex_Mono } from "next/font/google";
+import { Geist, Fraunces, IBM_Plex_Mono, Noto_Sans_Devanagari } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+});
+
+const notoDeva = Noto_Sans_Devanagari({
+  variable: "--font-noto-deva",
+  subsets: ["devanagari"],
+  weight: ["400", "500"],
 });
 
 const fraunces = Fraunces({
@@ -46,7 +52,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${fraunces.variable} ${plexMono.variable} antialiased`}
+        className={`${geistSans.variable} ${fraunces.variable} ${plexMono.variable} ${notoDeva.variable} antialiased`}
       >
         {children}
       </body>

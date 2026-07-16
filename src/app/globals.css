@@ -1,26 +1,35 @@
 @import "tailwindcss";
 
 /* ============================================================
-   wheretoplant — "prediction instrument" data-forward theme
-   Dark cartographic UI: 7-ha tile grid motif + green/amber/red
-   confidence language taken straight from the map legend.
+   wheretoplant — LIGHT "field-notebook" theme
+   Warm cream base, WCAG-AA contrast for an older audience.
+   Keeps the identity: 7-ha tile-grid motif + green/amber/red
+   confidence language. Text-safe tokens are darkened to pass
+   AA on cream; the vivid brights survive only as *fills*
+   (map cells, dots) — never as text.
    ============================================================ */
 
 :root {
-  --bg:      #07110c;   /* deep forest ink            */
-  --bg-2:    #0a1710;   /* raised panel               */
-  --surface: #0e1e16;   /* card surface               */
-  --line:    #1b3427;   /* hairline / grid            */
-  --line-2:  #274a37;   /* stronger border            */
-  --fg:      #e8f1ea;   /* warm off-white             */
-  --muted:   #8ba798;   /* secondary text             */
-  --faint:   #55705f;   /* tertiary / captions        */
+  --bg:      #f7f5ec;   /* warm paper-cream                 */
+  --bg-2:    #fdfcf5;   /* subtle alt section / footer      */
+  --surface: #fffdf7;   /* card / panel                     */
+  --line:    #bcc9b8;   /* hairline / grid                  */
+  --line-2:  #7c917c;   /* interactive border (3:1 on bg)   */
+  --fg:      #14231a;   /* ~15:1 on bg                      */
+  --muted:   #46594c;   /* ~6.9:1                           */
+  --faint:   #5e7266;   /* ~4.7:1 — passes AA               */
 
-  --hi:   #33d17f;      /* HIGH confidence / primary  */
-  --hi-2: #1e8c55;
-  --med:  #f0b429;      /* MEDIUM                     */
-  --low:  #e5544b;      /* LOW / risk                 */
-  --data: #66e3c6;      /* cyan-mint data accent      */
+  --hi:   #1a7f4b;      /* HIGH / primary — AA text+border  */
+  --hi-2: #146239;      /* darker green (button border)     */
+  --med:  #8f5f00;      /* MEDIUM — brown-gold to pass AA   */
+  --low:  #c0362c;      /* LOW / risk                       */
+  --data: #0f766e;      /* teal accent — AA                 */
+
+  /* vivid FILLS — illustration only (map tiles/dots), never text */
+  --hi-fill:   #33d17f;
+  --med-fill:  #f0b429;
+  --low-fill:  #e5544b;
+  --data-fill: #4bd6bd;
 }
 
 @theme inline {
@@ -36,6 +45,10 @@
   --color-med: var(--med);
   --color-low: var(--low);
   --color-data: var(--data);
+  --color-hifill: var(--hi-fill);
+  --color-medfill: var(--med-fill);
+  --color-lowfill: var(--low-fill);
+  --color-datafill: var(--data-fill);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-plex-mono);
   --font-display: var(--font-fraunces);
@@ -43,75 +56,80 @@
 
 * { box-sizing: border-box; }
 
+/* gentle uniform enlargement for older readers (17px base) */
+html { font-size: 106.25%; scroll-behavior: smooth; }
+
 body {
   background: var(--bg);
   color: var(--fg);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-geist-sans), var(--font-noto-deva), system-ui, sans-serif;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
-html { scroll-behavior: smooth; }
 
-::selection { background: color-mix(in oklab, var(--hi) 35%, transparent); color: #fff; }
+::selection { background: color-mix(in oklab, var(--hi) 22%, transparent); color: var(--fg); }
 
-/* --- the tile field: the 7-ha grid that underpins the product --- */
+/* --- the 7-ha tile field (subtle green on cream) --- */
 .tilefield {
   background-image:
-    linear-gradient(to right,  color-mix(in oklab, var(--line) 60%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in oklab, var(--line) 60%, transparent) 1px, transparent 1px);
+    linear-gradient(to right,  rgba(26,127,75,.10) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(26,127,75,.10) 1px, transparent 1px);
   background-size: 44px 44px;
 }
 .tilefield-sm { background-size: 26px 26px; }
-/* fade a grid out toward the edges */
 .mask-radial { -webkit-mask-image: radial-gradient(ellipse at center, #000 40%, transparent 78%);
                        mask-image: radial-gradient(ellipse at center, #000 40%, transparent 78%); }
 .mask-b { -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
                   mask-image: linear-gradient(to bottom, #000 55%, transparent); }
 
 /* --- type helpers --- */
-.font-display { font-family: var(--font-fraunces), Georgia, serif; }
+.font-display { font-family: var(--font-fraunces), Georgia, serif; font-weight: 500; }
 .font-mono    { font-family: var(--font-plex-mono), ui-monospace, monospace; }
+/* eyebrow now uses the sans (mono at small sizes is hard for older eyes) */
 .eyebrow {
-  font-family: var(--font-plex-mono), monospace;
+  font-family: var(--font-geist-sans), sans-serif;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.22em;
-  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  font-size: 0.8rem;
   color: var(--data);
 }
 
-/* --- surfaces --- */
+/* --- surfaces: on light you need border + soft shadow --- */
 .card {
-  background: color-mix(in oklab, var(--surface) 92%, transparent);
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(20,35,26,.08);
 }
 .card-hover { transition: border-color .25s, transform .25s, box-shadow .25s; }
 .card-hover:hover {
   border-color: var(--line-2);
   transform: translateY(-3px);
-  box-shadow: 0 18px 50px -24px rgba(0,0,0,.7), 0 0 0 1px color-mix(in oklab, var(--hi) 22%, transparent);
+  box-shadow: 0 12px 32px -14px rgba(20,35,26,.22);
 }
 
-/* --- confidence chips (green / amber / red = the legend) --- */
+/* --- confidence chips: filled tint + dark text + border --- */
 .chip {
   display: inline-flex; align-items: center; gap: .4rem;
   font-family: var(--font-plex-mono), monospace;
-  font-size: .68rem; letter-spacing: .06em; text-transform: uppercase;
-  padding: .2rem .5rem; border-radius: 999px; border: 1px solid;
+  font-size: .78rem; letter-spacing: .03em; text-transform: uppercase;
+  padding: .2rem .55rem; border-radius: 999px; border: 1px solid;
 }
 .chip::before { content: ""; width: 6px; height: 6px; border-radius: 999px; background: currentColor; }
-.chip-hi  { color: var(--hi);  border-color: color-mix(in oklab, var(--hi) 45%, transparent);  background: color-mix(in oklab, var(--hi) 12%, transparent); }
-.chip-med { color: var(--med); border-color: color-mix(in oklab, var(--med) 45%, transparent); background: color-mix(in oklab, var(--med) 12%, transparent); }
-.chip-low { color: var(--low); border-color: color-mix(in oklab, var(--low) 45%, transparent); background: color-mix(in oklab, var(--low) 12%, transparent); }
+.chip-hi  { background: #d7f0dd; color: #135c38; border-color: #1a7f4b; }
+.chip-med { background: #fdeec8; color: #6d4a00; border-color: #8f5f00; }
+.chip-low { background: #fadcd8; color: #8f231b; border-color: #c0362c; }
 
-/* --- buttons --- */
-.btn { display:inline-flex; align-items:center; gap:.55rem; font-family: var(--font-plex-mono), monospace;
-       font-size:.82rem; letter-spacing:.02em; padding:.7rem 1.1rem; border-radius:11px; border:1px solid transparent; transition: all .2s; }
-.btn-primary { background: var(--hi); color: #04140c; font-weight: 600; }
-.btn-primary:hover { background: color-mix(in oklab, var(--hi) 88%, #fff); box-shadow: 0 0 0 4px color-mix(in oklab, var(--hi) 18%, transparent); }
+/* --- buttons: solid green, white text, no glow --- */
+.btn { display:inline-flex; align-items:center; gap:.55rem; font-family: var(--font-geist-sans), sans-serif;
+       font-size:.92rem; font-weight:600; letter-spacing:.01em; padding:.72rem 1.15rem; border-radius:11px; border:1px solid transparent; transition: all .2s; }
+.btn-primary { background: var(--hi); color: #fff; border-color: var(--hi-2); box-shadow: 0 1px 2px rgba(20,35,26,.15); }
+.btn-primary:hover { background: var(--hi-2); }
 .btn-ghost { border-color: var(--line-2); color: var(--fg); }
-.btn-ghost:hover { border-color: var(--hi); color: var(--hi); }
+.btn-ghost:hover { border-color: var(--hi); color: var(--hi); background: color-mix(in oklab, var(--hi) 7%, transparent); }
 
 /* --- orchestrated load reveal --- */
 @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
@@ -119,17 +137,17 @@ html { scroll-behavior: smooth; }
 .d1{animation-delay:.05s}.d2{animation-delay:.12s}.d3{animation-delay:.19s}
 .d4{animation-delay:.26s}.d5{animation-delay:.33s}.d6{animation-delay:.4s}.d7{animation-delay:.5s}
 
-/* --- a slow scan sweep for the "predicting" panel --- */
+/* --- faint scan sweep on the prediction panel (kept subtle on light) --- */
 @keyframes scan { 0%{transform:translateY(-100%)} 100%{transform:translateY(220%)} }
 .scan::after {
   content:""; position:absolute; inset:0; pointer-events:none;
-  background: linear-gradient(to bottom, transparent, color-mix(in oklab, var(--hi) 16%, transparent), transparent);
+  background: linear-gradient(to bottom, transparent, rgba(26,127,75,.09), transparent);
   height: 40%; animation: scan 4.2s cubic-bezier(.6,0,.4,1) infinite;
 }
 
-/* --- soft pulsing "you are here" marker --- */
-@keyframes ping { 0%{transform:scale(1);opacity:.7} 70%,100%{transform:scale(2.6);opacity:0} }
-.ping::after { content:""; position:absolute; inset:0; border-radius:999px; background: var(--data); animation: ping 2.4s ease-out infinite; }
+/* --- "you are here" marker --- */
+@keyframes ping { 0%{transform:scale(1);opacity:.6} 70%,100%{transform:scale(2.6);opacity:0} }
+.ping::after { content:""; position:absolute; inset:0; border-radius:inherit; background: var(--data); animation: ping 2.4s ease-out infinite; }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; animation: none; }
@@ -138,7 +156,7 @@ html { scroll-behavior: smooth; }
 }
 
 /* --- scrollbar --- */
-::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar { width: 12px; height: 12px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 6px; border: 2px solid var(--bg); }
-::-webkit-scrollbar-thumb:hover { background: var(--hi-2); }
+::-webkit-scrollbar-thumb { background: var(--line); border-radius: 6px; border: 3px solid var(--bg); }
+::-webkit-scrollbar-thumb:hover { background: var(--line-2); }

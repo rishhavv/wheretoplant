@@ -18,7 +18,7 @@ const TILES =
   "lmhhmhho" +
   "hhomhlhh";
 const TILE_CLR: Record<string, string> = {
-  h: "bg-hi/70", m: "bg-med/70", l: "bg-low/70", o: "bg-line/40",
+  h: "bg-hifill", m: "bg-medfill", l: "bg-lowfill", o: "bg-line/50",
 };
 
 function StatTile({ n, label }: { n: string; label: string }) {
@@ -38,12 +38,7 @@ export default function Home() {
       {/* ---------------- HERO ---------------- */}
       <section className="relative overflow-hidden border-b border-line">
         {/* backdrop grid */}
-        <div className="tilefield mask-radial pointer-events-none absolute inset-0 opacity-60" aria-hidden />
-        <div
-          className="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[820px] -translate-x-1/2 rounded-full opacity-30 blur-[120px]"
-          style={{ background: "radial-gradient(circle, var(--hi), transparent 70%)" }}
-          aria-hidden
-        />
+        <div className="tilefield mask-radial pointer-events-none absolute inset-0 opacity-70" aria-hidden />
         <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 py-20 md:grid-cols-[1.05fr_0.95fr] md:py-28">
           <div>
             <p className="eyebrow reveal d1">ML · Forest restoration · Himachal Pradesh</p>
@@ -81,7 +76,7 @@ export default function Home() {
                   return (
                     <div
                       key={i}
-                      className={`relative aspect-square rounded-[3px] ${here ? "bg-data" : TILE_CLR[t]}`}
+                      className={`relative aspect-square rounded-[3px] ${here ? "bg-datafill" : TILE_CLR[t]}`}
                     >
                       {here && <span className="ping absolute inset-0 rounded-[3px]" aria-hidden />}
                     </div>
