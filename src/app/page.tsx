@@ -1,556 +1,426 @@
-'use client';
+import Image from "next/image";
+import {
+  ArrowUpRight, MapPin, TrendingUp, Languages, Zap, Sprout,
+  Clock, Layers, Users, Target, ScatterChart,
+} from "lucide-react";
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
 
-import { ArrowRight, Bot, Globe, TrendingUp, Users, Zap, MapPin, MessageCircle, Menu, X, ChevronDown, Leaf, Target, Clock, Scaling } from 'lucide-react';
-import { useState } from 'react';
-import Image from 'next/image';
+const BOT_URL = "https://t.me/seedsagebot";
 
-// Accordion Item Component
-const AccordionItem = ({ title, children, isOpen, onClick }: { title: string, children: React.ReactNode, isOpen: boolean, onClick: () => void }) => {
-  return (
-    <div className="border-b border-green-200">
-      <button
-        onClick={onClick}
-        className="flex justify-between items-center w-full py-5 text-left text-lg font-semibold text-gray-900"
-      >
-        <span>{title}</span>
-        <ChevronDown className={`w-6 h-6 transform transition-transform ${isOpen ? 'rotate-180' : ''}`} />
-      </button>
-      {isOpen && (
-        <div className="pb-5 pr-10">
-          <p className="text-gray-600">{children}</p>
-        </div>
-      )}
-    </div>
-  );
+/* deterministic tile field for the hero "prediction" panel
+   h=high(green) m=medium(amber) l=low(red) o=off  H=you-are-here */
+const TILES =
+  "hhmhhlmh" +
+  "hmhhlmhh" +
+  "mhhHhmhl" +
+  "hlmhhhmh" +
+  "lmhhmhho" +
+  "hhomhlhh";
+const TILE_CLR: Record<string, string> = {
+  h: "bg-hi/70", m: "bg-med/70", l: "bg-low/70", o: "bg-line/40",
 };
 
+function StatTile({ n, label }: { n: string; label: string }) {
+  return (
+    <div className="card card-hover p-5">
+      <div className="font-mono text-3xl font-semibold text-fg md:text-4xl">{n}</div>
+      <p className="mt-2 text-sm leading-relaxed text-muted">{label}</p>
+    </div>
+  );
+}
 
 export default function Home() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [openAccordion, setOpenAccordion] = useState<number | null>(1);
-
-  const handleAccordionClick = (index: number) => {
-    setOpenAccordion(openAccordion === index ? null : index);
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-green-100 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg flex items-center justify-center animate-float">
-                <Globe className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold text-gray-900">wheretoplant</span>
-            </div>
-            
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="#problem" className="text-gray-600 hover:text-green-600 transition-colors">Problem</a>
-              <a href="#solution" className="text-gray-600 hover:text-green-600 transition-colors">Solution</a>
-              <a href="#features" className="text-gray-600 hover:text-green-600 transition-colors">Features</a>
-              <a href="#demo" className="text-gray-600 hover:text-green-600 transition-colors">Demo</a>
-              <a href="/contact" className="text-gray-600 hover:text-green-600 transition-colors">Contact</a>
-              <a href="#try-now" className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
-                Try @wheretoplantbot
-              </a>
-            </div>
+    <div className="min-h-screen bg-bg text-fg">
+      <Nav />
 
-            {/* Mobile menu button */}
-            <div className="md:hidden">
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="text-gray-600 hover:text-green-600 transition-colors"
-              >
-                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </button>
+      {/* ---------------- HERO ---------------- */}
+      <section className="relative overflow-hidden border-b border-line">
+        {/* backdrop grid */}
+        <div className="tilefield mask-radial pointer-events-none absolute inset-0 opacity-60" aria-hidden />
+        <div
+          className="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[820px] -translate-x-1/2 rounded-full opacity-30 blur-[120px]"
+          style={{ background: "radial-gradient(circle, var(--hi), transparent 70%)" }}
+          aria-hidden
+        />
+        <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 py-20 md:grid-cols-[1.05fr_0.95fr] md:py-28">
+          <div>
+            <p className="eyebrow reveal d1">ML · Forest restoration · Himachal Pradesh</p>
+            <h1 className="reveal d2 mt-5 font-display text-5xl leading-[1.02] tracking-tight text-fg md:text-6xl">
+              Plant where trees
+              <br />
+              <span className="text-hi">actually survive.</span>
+            </h1>
+            <p className="reveal d3 mt-6 max-w-xl text-lg leading-relaxed text-muted">
+              Revolutionizing forest restoration through machine-learning powered
+              plantation site selection — now with native-species recommendations,
+              in Hindi and English.
+            </p>
+            <div className="reveal d4 mt-8 flex flex-wrap items-center gap-3">
+              <a href={BOT_URL} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                Try @seedsagebot <ArrowUpRight size={16} />
+              </a>
+              <a href="#how" className="btn btn-ghost">How it works</a>
             </div>
+            <p className="reveal d5 mt-6 font-mono text-xs text-faint">
+              A Telegram bot · share a location · get a prediction in seconds
+            </p>
           </div>
 
-          {/* Mobile Navigation */}
-          {mobileMenuOpen && (
-            <div className="md:hidden bg-white border-t border-green-100 py-4">
-              <div className="flex flex-col space-y-4">
-                <a 
-                  href="#problem" 
-                  className="text-gray-600 hover:text-green-600 transition-colors px-4 py-2"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Problem
-                </a>
-                <a 
-                  href="#solution" 
-                  className="text-gray-600 hover:text-green-600 transition-colors px-4 py-2"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Solution
-                </a>
-                <a 
-                  href="#features" 
-                  className="text-gray-600 hover:text-green-600 transition-colors px-4 py-2"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Features
-                </a>
-                <a 
-                  href="#demo" 
-                  className="text-gray-600 hover:text-green-600 transition-colors px-4 py-2"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Demo
-                </a>
-                <a 
-                  href="/contact" 
-                  className="text-gray-600 hover:text-green-600 transition-colors px-4 py-2"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Contact
-                </a>
-                <a 
-                  href="#try-now" 
-                  className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors mx-4"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Try @wheretoplantbot
-                </a>
+          {/* prediction instrument */}
+          <div className="reveal d5">
+            <div className="scan card relative overflow-hidden p-5">
+              <div className="flex items-center justify-between font-mono text-[0.7rem] text-faint">
+                <span>PLANTATION VIABILITY</span>
+                <span>32.10°N 76.53°E</span>
+              </div>
+              <div className="relative mt-4 grid grid-cols-8 gap-1.5">
+                {TILES.split("").map((t, i) => {
+                  const here = t === "H";
+                  return (
+                    <div
+                      key={i}
+                      className={`relative aspect-square rounded-[3px] ${here ? "bg-data" : TILE_CLR[t]}`}
+                    >
+                      {here && <span className="ping absolute inset-0 rounded-[3px]" aria-hidden />}
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="mt-5 flex items-center justify-between border-t border-line pt-4">
+                <div>
+                  <div className="font-mono text-2xl font-semibold text-fg">82%</div>
+                  <div className="font-mono text-[0.7rem] text-faint">survival likelihood</div>
+                </div>
+                <div className="flex flex-wrap justify-end gap-1.5">
+                  <span className="chip chip-hi">Shisham · High</span>
+                  <span className="chip chip-hi">Khair · High</span>
+                  <span className="chip chip-med">Siras · Med</span>
+                </div>
               </div>
             </div>
-          )}
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium mb-6">
-              <Bot className="w-4 h-4 mr-2" />
-              ML-Powered Forest Restoration
-            </div>
-            <h1 className="text-5xl md:text-7xl font-bold animate-gradient mb-6">
-            WhereToPlant Bot
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-4xl mx-auto">
-              Revolutionizing Forest Restoration Through Machine-Learning Powered Plantation Site Selection
+            <p className="mt-3 text-center font-mono text-[0.7rem] text-faint">
+              Illustrative output · one ~7-hectare tile
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a 
-                href="#try-now" 
-                className="bg-green-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-green-700 transition-all duration-300 transform hover:scale-105 flex items-center animate-pulse-glow"
-              >
-                Try @wheretoplantbot
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </a>
-              <a 
-                href="#problem" 
-                className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-xl text-lg font-semibold hover:border-green-600 hover:text-green-600 transition-all duration-300"
-              >
-                Learn More
-              </a>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* Problem Section */}
-      <section id="problem" className="py-16 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
-            <div className="text-left">
-              <div className="inline-flex items-center px-4 py-2 bg-red-100 text-red-800 rounded-full text-sm font-medium mb-4">
-                The Challenge
-              </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Billions Wasted on Ineffective Tree Planting 💸
+      {/* ---------------- PROBLEM ---------------- */}
+      <section id="problem" className="border-b border-line">
+        <div className="mx-auto max-w-6xl px-5 py-20">
+          <div className="grid gap-12 md:grid-cols-2 md:items-end">
+            <div>
+              <p className="eyebrow" style={{ color: "var(--low)" }}>The challenge</p>
+              <h2 className="mt-4 font-display text-4xl leading-tight text-fg md:text-5xl">
+                Billions wasted on ineffective tree planting.
               </h2>
-              <p className="text-xl text-gray-600">
-                Most tree planting initiatives fail by choosing unsuitable sites, squandering resources and hindering successful restoration.
+              <p className="mt-5 max-w-lg text-lg leading-relaxed text-muted">
+                Most tree planting initiatives fail by choosing unsuitable sites,
+                squandering resources and hindering successful restoration.
               </p>
             </div>
-
-            <div className="space-y-6">
-              <div className="bg-red-50 p-6 rounded-2xl border border-red-200 flex items-center shadow-md">
-                <div className="text-4xl font-bold text-red-600 mr-4">60%</div>
-                <p className="text-gray-700">of annual restoration budget is wasted on doomed sites</p>
-              </div>
-              <div className="bg-orange-50 p-6 rounded-2xl border border-orange-200 flex items-center shadow-md">
-                <div className="text-4xl font-bold text-orange-600 mr-4">80%</div>
-                <p className="text-gray-700">of trees die in poorly selected locations</p>
-              </div>
-              <div className="bg-yellow-50 p-6 rounded-2xl border border-yellow-200 flex items-center shadow-md">
-                <div className="text-4xl font-bold text-yellow-600 mr-4">$800M+</div>
-                <p className="text-gray-700">spent annually in India on forest restoration and conservation</p>
-              </div>
+            <div className="grid gap-4 sm:grid-cols-3 md:grid-cols-1 lg:grid-cols-3">
+              <StatTile n="60%" label="of annual restoration budget is wasted on doomed sites" />
+              <StatTile n="80%" label="of trees die in poorly selected locations" />
+              <StatTile n="$800M+" label="spent annually in India on forest restoration and conservation" />
             </div>
           </div>
 
-          <div className="bg-gradient-to-r from-red-50 to-orange-50 p-8 rounded-2xl border border-red-200">
-            <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Why Do Reforestation Efforts Fail?</h3>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="space-y-3">
-                <div className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
-                  <p className="text-gray-700"><strong>Inadequate Site Analysis:</strong> Planting without considering crucial data like soil health, climate patterns, and land history.</p>
+          <div className="card mt-14 p-8">
+            <h3 className="font-mono text-sm uppercase tracking-widest text-data">Why reforestation efforts fail</h3>
+            <div className="mt-7 grid gap-x-10 gap-y-6 md:grid-cols-2">
+              {[
+                ["Inadequate site analysis", "Planting without considering crucial data like soil health, climate patterns, and land history."],
+                ["Mismatched species", "Selecting tree species that are not suited to the local micro-environment."],
+                ["Ignoring social factors", "Overlooking land tenure issues and community needs, which undermines long-term success."],
+                ["Wasted resources", "Pouring funds and effort into locations doomed from the start, eroding trust and slowing progress."],
+              ].map(([t, d]) => (
+                <div key={t} className="flex gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-low" />
+                  <p className="text-[0.95rem] leading-relaxed text-muted">
+                    <strong className="font-semibold text-fg">{t}:</strong> {d}
+                  </p>
                 </div>
-                <div className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
-                  <p className="text-gray-700"><strong>Mismatched Species:</strong> Selecting tree species that are not suited to the local micro-environment.</p>
-                </div>
-              </div>
-              <div className="space-y-3">
-                <div className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
-                  <p className="text-gray-700"><strong>Ignoring Social Factors:</strong> Overlooking land tenure issues and community needs, which undermines long-term success.</p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
-                  <p className="text-gray-700"><strong>Wasted Resources:</strong> Pouring funds and effort into locations doomed from the start, eroding trust and slowing progress.</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Solution Section */}
-      <section id="solution" className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-green-50 to-blue-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              The Solution: ML Meets Conservation
+      {/* ---------------- HOW IT WORKS ---------------- */}
+      <section id="how" className="border-b border-line">
+        <div className="mx-auto max-w-6xl px-5 py-20">
+          <p className="eyebrow">The pipeline</p>
+          <h2 className="mt-4 font-display text-4xl text-fg md:text-5xl">ML meets conservation.</h2>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted">
+            WhereToPlant (<span className="font-mono text-fg">@seedsagebot</span>) is a
+            data-driven Telegram bot that transforms how we approach forest restoration.
+          </p>
+
+          <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-4">
+            {[
+              ["01", "Share location", "Open Telegram, find @seedsagebot, and share your geographic coordinates."],
+              ["02", "Model analysis", "The machine-learning model processes environmental data, climate patterns, soil and elevation."],
+              ["03", "Visual report", "A color-coded viability map with survival predictions and star ratings."],
+              ["04", "What to plant", "Native-species recommendations for the site, graded by confidence — then decide."],
+            ].map(([n, t, d]) => (
+              <div key={n} className="bg-surface p-6">
+                <div className="font-mono text-sm text-hi">{n}</div>
+                <h3 className="mt-4 text-lg font-semibold text-fg">{t}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{d}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* feature strip */}
+          <div className="mt-6 grid gap-4 md:grid-cols-4">
+            {[
+              [MapPin, "Location intelligence", "Analyzes soil composition, climate patterns, elevation, and historical vegetation data."],
+              [TrendingUp, "Success prediction", "Precise percentage-based survival predictions and star ratings."],
+              [Languages, "Bilingual access", "Operates in both Hindi and English for diverse communities across India."],
+              [Zap, "Instant results", "Comprehensive analysis within seconds via Telegram's familiar interface."],
+            ].map(([Icon, t, d]) => {
+              const I = Icon as typeof MapPin;
+              return (
+                <div key={t as string} className="card card-hover p-5">
+                  <I size={18} className="text-hi" />
+                  <h3 className="mt-3 text-[0.95rem] font-semibold text-fg">{t as string}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-muted">{d as string}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------- SPECIES SELECTION (now live) ---------------- */}
+      <section id="species" className="relative overflow-hidden border-b border-line bg-bg2">
+        <div className="tilefield-sm mask-b pointer-events-none absolute inset-0 opacity-40" aria-hidden />
+        <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 py-24 md:grid-cols-2">
+          <div>
+            <span className="chip chip-hi">Now live</span>
+            <h2 className="mt-5 font-display text-4xl leading-tight text-fg md:text-5xl">
+              What to plant, not just where.
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              WhereToPlant Bot (@wheretoplantbot) is a data-driven Telegram bot that transforms how we approach forest restoration.
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">
+              Share a location and the bot now recommends the native tree species suited
+              to that specific site — each graded <span className="text-hi">High</span>,{" "}
+              <span className="text-med">Medium</span>, or <span className="text-low">Low</span>{" "}
+              confidence, in Hindi and English.
             </p>
+            <ul className="mt-7 space-y-3">
+              {[
+                "Native species matched to the tile's climate, soil and terrain",
+                "Confidence-graded — the bot only speaks when the signal is there",
+                "Risk-framed guidance to consider, never a command",
+                "Bilingual output for field officers and communities",
+              ].map((t) => (
+                <li key={t} className="flex items-start gap-3 text-[0.95rem] text-muted">
+                  <Sprout size={17} className="mt-0.5 flex-shrink-0 text-hi" />
+                  {t}
+                </li>
+              ))}
+            </ul>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16 stagger-animation">
-            <div className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
-                <MapPin className="w-6 h-6 text-blue-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Location Intelligence</h3>
-              <p className="text-gray-600">Analyzes soil composition, climate patterns, elevation, and historical vegetation data</p>
+          {/* example species card — mirrors the bot's message */}
+          <div className="card overflow-hidden">
+            <div className="flex items-center justify-between border-b border-line px-5 py-3 font-mono text-[0.72rem] text-faint">
+              <span className="flex items-center gap-2"><MapPin size={13} className="text-data" /> shared location</span>
+              <span>survival 82% · Fair</span>
             </div>
-            <div className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
-              <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
-                <TrendingUp className="w-6 h-6 text-green-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Success Prediction</h3>
-              <p className="text-gray-600">Provides precise percentage-based survival predictions and star ratings</p>
-            </div>
-            <div className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
-              <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
-                <MessageCircle className="w-6 h-6 text-purple-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Bilingual Access</h3>
-              <p className="text-gray-600">Operates in both Hindi and English for diverse communities across India</p>
-            </div>
-            <div className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
-              <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-4">
-                <Zap className="w-6 h-6 text-orange-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Instant Results</h3>
-              <p className="text-gray-600">Delivers comprehensive analysis within seconds via Telegram&apos;s familiar interface</p>
-            </div>
-          </div>
-
-          {/* How It Works */}
-          <div className="bg-white p-8 rounded-2xl shadow-lg">
-            <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">How It Works</h3>
-            <div className="max-w-2xl mx-auto">
-              <AccordionItem
-                title="1. Share Location"
-                isOpen={openAccordion === 1}
-                onClick={() => handleAccordionClick(1)}
-              >
-                User opens Telegram, finds @wheretoplantbot, and shares their geographic coordinates.
-              </AccordionItem>
-              <AccordionItem
-                title="2. Machine Learning Analysis"
-                isOpen={openAccordion === 2}
-                onClick={() => handleAccordionClick(2)}
-              >
-                The bot&apos;s machine learning model processes environmental data and climate patterns.
-              </AccordionItem>
-              <AccordionItem
-                title="3. Visual Report"
-                isOpen={openAccordion === 3}
-                onClick={() => handleAccordionClick(3)}
-              >
-                Generates a color-coded viability map with success predictions and insights.
-              </AccordionItem>
-              <AccordionItem
-                title="4. Make Decision"
-                isOpen={openAccordion === 4}
-                onClick={() => handleAccordionClick(4)}
-              >
-                Users receive star ratings, success percentages, and optimal plantation strategies.
-              </AccordionItem>
+            <div className="p-5">
+              <p className="font-mono text-[0.72rem] uppercase tracking-widest text-data">Species suited to this area</p>
+              <ul className="mt-4 space-y-2.5">
+                {[
+                  ["Shisham", "hi", "High"],
+                  ["Khair", "hi", "High"],
+                  ["Siras", "med", "Medium"],
+                  ["Bargad", "med", "Medium"],
+                  ["Mango", "low", "Low"],
+                ].map(([name, band, label], i) => (
+                  <li key={name} className="flex items-center justify-between">
+                    <span className="flex items-center gap-3">
+                      <span className="font-mono text-xs text-faint">{i + 1}</span>
+                      <span className="text-fg">{name}</span>
+                    </span>
+                    <span className={`chip chip-${band}`}>{label}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 border-t border-line pt-4 text-xs leading-relaxed text-faint">
+                Guidance to consider, not a directive — local conditions matter.
+                <span className="mt-1 block">यह केवल सुझाव है, आदेश नहीं।</span>
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Current Focus Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-green-100 via-amber-50 to-green-200">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-green-900 mb-6">
-              Current Focus: Himachal Pradesh
-            </h2>
-            <p className="text-xl text-green-800 max-w-3xl mx-auto">
-              The bot currently specializes in Himachal Pradesh, a state of critical ecological importance in the Indian Himalayas.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="relative flex justify-center">
+      {/* ---------------- FOCUS: HIMACHAL PRADESH ---------------- */}
+      <section id="focus" className="border-b border-line">
+        <div className="mx-auto max-w-6xl px-5 py-20">
+          <p className="eyebrow">Current focus</p>
+          <h2 className="mt-4 font-display text-4xl text-fg md:text-5xl">Himachal Pradesh.</h2>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted">
+            The bot currently specializes in Himachal Pradesh, a state of critical
+            ecological importance in the Indian Himalayas.
+          </p>
+          <div className="mt-12 grid items-center gap-12 md:grid-cols-2">
+            <div className="card overflow-hidden p-3">
               <Image
                 src="/Himachal_Pradesh_Map.png"
                 alt="Map of Himachal Pradesh"
-                width={400}
-                height={500}
-                className="w-full max-w-md h-auto drop-shadow-xl rounded-xl border-4 border-green-300 bg-white"
+                width={620}
+                height={452}
+                className="h-auto w-full rounded-lg opacity-90"
                 priority
               />
             </div>
-
-            <div className="space-y-8">
-              <div className="bg-gradient-to-br from-blue-100 to-blue-200 p-6 rounded-2xl border border-blue-200 shadow">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Altitude Variations</h3>
-                <p className="text-gray-700">From 350m to 7,000m elevation requiring species-specific planning.</p>
-              </div>
-              <div className="bg-gradient-to-br from-green-100 to-green-200 p-6 rounded-2xl border border-green-200 shadow">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Climate Diversity</h3>
-                <p className="text-gray-700">Subtropical to alpine conditions within the same state.</p>
-              </div>
-              <div className="bg-gradient-to-br from-amber-100 to-amber-200 p-6 rounded-2xl border border-amber-200 shadow">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Soil Complexity</h3>
-                <p className="text-gray-700">Varied geological formations affecting plantation success.</p>
-              </div>
+            <div className="space-y-4">
+              {[
+                [Layers, "Altitude variations", "From 350m to 7,000m elevation, requiring species-specific planning."],
+                [ScatterChart, "Climate diversity", "Subtropical to alpine conditions within the same state."],
+                [MapPin, "Soil complexity", "Varied geological formations affecting plantation success."],
+              ].map(([Icon, t, d]) => {
+                const I = Icon as typeof MapPin;
+                return (
+                  <div key={t as string} className="card card-hover flex gap-4 p-5">
+                    <I size={20} className="mt-0.5 flex-shrink-0 text-data" />
+                    <div>
+                      <h3 className="font-semibold text-fg">{t as string}</h3>
+                      <p className="mt-1 text-sm leading-relaxed text-muted">{d as string}</p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Impact & Vision Section */}
-      <section id="features" className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-green-50 to-amber-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-green-900 mb-6">
-              Impact & Vision
-            </h2>
+      {/* ---------------- IMPACT ---------------- */}
+      <section id="impact" className="border-b border-line bg-bg2">
+        <div className="mx-auto max-w-6xl px-5 py-20">
+          <p className="eyebrow">Impact &amp; vision</p>
+          <h2 className="mt-4 font-display text-4xl text-fg md:text-5xl">Fewer wasted saplings.</h2>
+
+          <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {[
+              [TrendingUp, "Resource optimization", "Directs limited funds, labor, and saplings to locations with the highest success probability."],
+              [Zap, "Waste reduction", "Prevents costly mistakes by identifying unsuitable sites — a potential $63M–$100M saved in HP over 10 years."],
+              [Users, "Community empowerment", "Gives local citizens and organizations scientific tools for conservation decision-making."],
+              [Target, "Data-driven policy", "Evidence-based insights for government and NGO restoration strategies."],
+            ].map(([Icon, t, d]) => {
+              const I = Icon as typeof MapPin;
+              return (
+                <div key={t as string} className="card card-hover p-6">
+                  <I size={18} className="text-hi" />
+                  <h3 className="mt-4 font-semibold text-fg">{t as string}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">{d as string}</p>
+                </div>
+              );
+            })}
           </div>
 
-          {/* Core Impact Cards */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            <div className="bg-white/60 backdrop-blur-sm p-6 rounded-2xl shadow-md border border-green-200">
-              <div className="w-12 h-12 bg-green-200 text-green-800 rounded-xl flex items-center justify-center mb-4">
-                <TrendingUp className="w-6 h-6" />
+          <div className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3">
+            {[
+              ["350M+ ha", "of land targeted for restoration globally — a massive opportunity for impact."],
+              ["$10B+", "in potential annual global waste if restoration is poorly targeted."],
+              ["Global goals", "Aligns with the SDGs, Bonn Challenge, and national commitments (NDCs)."],
+            ].map(([n, d]) => (
+              <div key={n} className="bg-surface p-7">
+                <div className="font-mono text-2xl font-semibold text-data md:text-3xl">{n}</div>
+                <p className="mt-3 text-sm leading-relaxed text-muted">{d}</p>
               </div>
-              <h3 className="text-xl font-semibold text-green-900 mb-2">Resource Optimization</h3>
-              <p className="text-green-800">Directs limited funds, labor, and saplings to locations with highest success probability.</p>
-            </div>
-            <div className="bg-white/60 backdrop-blur-sm p-6 rounded-2xl shadow-md border border-green-200">
-              <div className="w-12 h-12 bg-red-200 text-red-800 rounded-xl flex items-center justify-center mb-4">
-                <Zap className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-semibold text-green-900 mb-2">Waste Reduction</h3>
-              <p className="text-green-800">Prevents costly mistakes by identifying unsuitable sites, saving a potential $63M-$100M in HP over 10 years.</p>
-            </div>
-            <div className="bg-white/60 backdrop-blur-sm p-6 rounded-2xl shadow-md border border-green-200">
-              <div className="w-12 h-12 bg-green-200 text-green-800 rounded-xl flex items-center justify-center mb-4">
-                <Users className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-semibold text-green-900 mb-2">Community Empowerment</h3>
-              <p className="text-green-800">Gives local citizens and organizations scientific tools for conservation decision-making.</p>
-            </div>
-            <div className="bg-white/60 backdrop-blur-sm p-6 rounded-2xl shadow-md border border-green-200">
-              <div className="w-12 h-12 bg-blue-200 text-blue-800 rounded-xl flex items-center justify-center mb-4">
-                <Globe className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-semibold text-green-900 mb-2">Data-Driven Policy</h3>
-              <p className="text-green-800">Provides evidence-based insights for government and NGO restoration strategies.</p>
-            </div>
-          </div>
-
-          {/* Global Impact Stats */}
-          <div className="bg-green-800/80 text-white p-8 rounded-2xl border border-green-300 shadow-lg">
-            <h3 className="text-3xl font-bold text-white mb-8 text-center">Global Impact & Alignment</h3>
-            <div className="grid md:grid-cols-3 gap-8 text-center">
-              <div>
-                <p className="text-4xl font-bold text-amber-300 mb-2">350M+ ha</p>
-                <p>of land targeted for restoration globally, offering a massive opportunity for impact.</p>
-              </div>
-              <div>
-                <p className="text-4xl font-bold text-amber-300 mb-2">$10B+</p>
-                <p>in potential annual global waste if restoration is poorly targeted.</p>
-              </div>
-              <div>
-                <p className="text-4xl font-bold text-amber-300 mb-2">Global Goals</p>
-                <p>WhereToPlant aligns with the SDGs, Bonn Challenge, and national commitments (NDCs).</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* What's Next Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-green-900 mb-6">
-              What&apos;s Next?
-            </h2>
-            <p className="text-xl text-green-800 max-w-3xl mx-auto">
-              WhereToPlant represents the first step in a comprehensive restoration ecosystem.
-            </p>
-          </div>
-
-          {/* Timeline */}
-          <div className="relative">
-            {/* Vertical Line */}
-            <div className="absolute left-9 sm:left-1/2 w-0.5 h-full bg-green-200" aria-hidden="true"></div>
-            
-            {/* Timeline Items */}
-            <div className="space-y-12">
-              {/* Item 1 */}
-              <div className="relative flex items-start sm:space-x-8">
-                <div className="flex-shrink-0 w-18 h-18 flex items-center justify-center bg-green-500 text-white rounded-full z-10">
-                  <Leaf className="w-8 h-8"/>
-                </div>
-                <div className="min-w-0 flex-1 sm:pl-8">
-                  <div className="bg-green-50 p-6 rounded-2xl border border-green-200 shadow-md">
-                    <h3 className="text-lg font-semibold text-green-900 mb-2">Species Recommendation</h3>
-                    <p className="text-green-800">Engine for "what to plant" based on location analysis.</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Item 2 */}
-              <div className="relative flex items-start sm:justify-end sm:space-x-reverse sm:space-x-8">
-                <div className="flex-shrink-0 w-18 h-18 flex items-center justify-center bg-green-500 text-white rounded-full z-10 sm:order-last">
-                  <Clock className="w-8 h-8"/>
-                </div>
-                <div className="min-w-0 flex-1 sm:pr-8 sm:text-right">
-                  <div className="bg-green-50 p-6 rounded-2xl border border-green-200 shadow-md">
-                    <h3 className="text-lg font-semibold text-green-900 mb-2">Optimal Timing</h3>
-                    <p className="text-green-800">Predictions for "when to plant" for maximum success.</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Item 3 */}
-              <div className="relative flex items-start sm:space-x-8">
-                <div className="flex-shrink-0 w-18 h-18 flex items-center justify-center bg-green-500 text-white rounded-full z-10">
-                  <Target className="w-8 h-8"/>
-                </div>
-                <div className="min-w-0 flex-1 sm:pl-8">
-                  <div className="bg-green-50 p-6 rounded-2xl border border-green-200 shadow-md">
-                    <h3 className="text-lg font-semibold text-green-900 mb-2">State Expansion & Integration</h3>
-                    <p className="text-green-800">Expansion to additional Indian states and integration with government restoration programs.</p>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Item 4 */}
-              <div className="relative flex items-start sm:justify-end sm:space-x-reverse sm:space-x-8">
-                <div className="flex-shrink-0 w-18 h-18 flex items-center justify-center bg-green-500 text-white rounded-full z-10 sm:order-last">
-                  <Scaling className="w-8 h-8"/>
-                </div>
-                <div className="min-w-0 flex-1 sm:pr-8 sm:text-right">
-                  <div className="bg-green-50 p-6 rounded-2xl border border-green-200 shadow-md">
-                    <h3 className="text-lg font-semibold text-green-900 mb-2">Community & Advanced Analytics</h3>
-                    <p className="text-green-800">Community monitoring, feedback systems, and enhanced data visualization.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Demo Video Section */}
-      <section id="demo" className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-green-100 via-amber-50 to-green-200">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Watch a Demo</h2>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            See WhereToPlant in action! Watch this short video to understand how our platform helps you make smarter, data-driven restoration decisions.
+      {/* ---------------- ROADMAP ---------------- */}
+      <section id="roadmap" className="border-b border-line">
+        <div className="mx-auto max-w-4xl px-5 py-20">
+          <p className="eyebrow">Roadmap</p>
+          <h2 className="mt-4 font-display text-4xl text-fg md:text-5xl">What&apos;s next.</h2>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted">
+            Site selection and species recommendation are live. The rest of a
+            comprehensive restoration ecosystem is next.
           </p>
-          <div className="aspect-w-9 aspect-h-16 w-full max-w-sm mx-auto rounded-xl overflow-hidden shadow-lg mb-4">
+          <div className="mt-12 space-y-3">
+            <div className="card flex items-center gap-4 border-hi/40 p-5" style={{ borderColor: "color-mix(in oklab, var(--hi) 40%, var(--line))" }}>
+              <Sprout size={20} className="flex-shrink-0 text-hi" />
+              <div className="flex-1">
+                <h3 className="font-semibold text-fg">Species recommendation</h3>
+                <p className="mt-1 text-sm text-muted">&ldquo;What to plant&rdquo; for a location.</p>
+              </div>
+              <span className="chip chip-hi">Shipped</span>
+            </div>
+            {[
+              [Clock, "Optimal timing", "Predictions for “when to plant” for maximum success."],
+              [Target, "State expansion & integration", "Additional Indian states and integration with government restoration programs."],
+              [Users, "Community & advanced analytics", "Community monitoring, feedback systems, and enhanced data visualization."],
+            ].map(([Icon, t, d]) => {
+              const I = Icon as typeof MapPin;
+              return (
+                <div key={t as string} className="card flex items-center gap-4 p-5">
+                  <I size={20} className="flex-shrink-0 text-faint" />
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-fg">{t as string}</h3>
+                    <p className="mt-1 text-sm text-muted">{d as string}</p>
+                  </div>
+                  <span className="font-mono text-[0.7rem] uppercase tracking-widest text-faint">Planned</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------- DEMO ---------------- */}
+      <section id="demo" className="border-b border-line bg-bg2">
+        <div className="mx-auto max-w-4xl px-5 py-20 text-center">
+          <p className="eyebrow">Demo</p>
+          <h2 className="mt-4 font-display text-4xl text-fg md:text-5xl">See it in action.</h2>
+          <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-muted">
+            A short walkthrough of how WhereToPlant helps you make smarter,
+            data-driven restoration decisions.
+          </p>
+          <div className="mx-auto mt-10 aspect-[9/16] w-full max-w-xs overflow-hidden rounded-2xl border border-line">
             <iframe
               src="https://www.youtube.com/embed/ld3vUOwQRJ4"
-              title="WhereToPlant Demo Video"
-              frameBorder="0"
+              title="WhereToPlant demo"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-              className="w-full h-full"
-            ></iframe>
+              className="h-full w-full"
+            />
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section id="try-now" className="py-16 px-4 sm:px-6 lg:px-8 bg-green-800">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Ready to Make a Difference?
+      {/* ---------------- CTA ---------------- */}
+      <section className="relative overflow-hidden">
+        <div className="tilefield mask-radial pointer-events-none absolute inset-0 opacity-50" aria-hidden />
+        <div className="relative mx-auto max-w-3xl px-5 py-24 text-center">
+          <h2 className="font-display text-4xl leading-tight text-fg md:text-5xl">
+            Ready to plant with confidence?
           </h2>
-          <p className="text-xl text-green-100 mb-8 max-w-2xl mx-auto">
-            Join the movement towards data-driven forest restoration. Whether you&apos;re a conservationist, researcher, or simply someone who cares about our environment, WhereToPlant is your gateway to smarter restoration decisions.
+          <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-muted">
+            Whether you&apos;re a conservationist, researcher, or someone who cares about
+            our environment — WhereToPlant is your gateway to smarter restoration decisions.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a 
-              href="https://t.me/seedsagebot" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="bg-white text-green-600 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 flex items-center"
-            >
-              <Bot className="mr-2 w-5 h-5" />
-              Try @wheretoplantbot Now
+          <div className="mt-9 flex flex-wrap justify-center gap-3">
+            <a href={BOT_URL} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+              Try @seedsagebot now <ArrowUpRight size={16} />
             </a>
-            <a 
-              href="#problem" 
-              className="border-2 border-white text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-white hover:text-green-600 transition-all duration-300"
-            >
-              Learn More
-            </a>
+            <a href="#how" className="btn btn-ghost">Learn more</a>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center">
-            <div className="flex items-center justify-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg flex items-center justify-center">
-                <Globe className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold">wheretoplant</span>
-            </div>
-            <p className="text-gray-400 mb-4">
-              Revolutionizing Forest Restoration Through ML-Powered Site Selection
-            </p>
-            <div className="flex justify-center space-x-6">
-              <a href="#problem" className="text-gray-400 hover:text-white transition-colors">Problem</a>
-              <a href="#solution" className="text-gray-400 hover:text-white transition-colors">Solution</a>
-              <a href="#features" className="text-gray-400 hover:text-white transition-colors">Features</a>
-              <a href="#demo" className="text-gray-400 hover:text-white transition-colors">Demo</a>
-              <a href="/contact" className="text-gray-400 hover:text-white transition-colors">Contact</a>
-              <a href="#try-now" className="text-gray-400 hover:text-white transition-colors">Try Bot</a>
-            </div>
-            <div className="mt-8 pt-8 border-t border-gray-800">
-              <p className="text-gray-500 text-sm">
-                © 2025 WhereToPlant. All rights reserved.
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
