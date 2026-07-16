@@ -20,11 +20,11 @@ export default function ContactPage() {
             <p className="mt-1 font-mono text-sm text-hi">Co-founder</p>
             <div className="mt-6 space-y-3 font-mono text-sm">
               <a
-                href="mailto:rishav.katoch17300@gmail.com"
+                href="mailto:rishav@rootiq.org"
                 className="flex items-center gap-3 text-muted transition-colors hover:text-fg"
               >
                 <Mail size={15} className="flex-shrink-0 text-data" />
-                <span className="break-all">rishav.katoch17300@gmail.com</span>
+                <span className="break-all">rishav@rootiq.org</span>
               </a>
               <a
                 href="https://www.rishavkatoch.me"
