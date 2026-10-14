@@ -27,13 +27,13 @@ export default function ContactPage() {
                 <span className="break-all">rishav@rootiq.org</span>
               </a>
               <a
-                href="https://www.rishavkatoch.me"
+                href="https://www.rishavkatoch.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-muted transition-colors hover:text-fg"
               >
                 <ArrowUpRight size={15} className="flex-shrink-0 text-data" />
-                <span>rishavkatoch.me</span>
+                <span>rishavkatoch.com</span>
               </a>
             </div>
           </div>
